@@ -30,7 +30,7 @@ function AddBook(props) {
     return (
         <div>
             <Button variant="outlined" color="primary" onClick={handleOpen}>
-                Add todo
+                Add new book
             </Button>
             <Dialog open={open}>
                 <DialogTitle>New todo</DialogTitle>

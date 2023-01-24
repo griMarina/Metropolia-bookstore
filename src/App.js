@@ -3,9 +3,9 @@ import { AgGridReact } from 'ag-grid-react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import AddBook from './AddBook';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import AddBook from './AddBook';
 
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
@@ -15,21 +15,19 @@ import './App.css';
 function App() {
   const [books, setBooks] = useState([]);
   const [columnDefs] = useState([
-    { field: 'title', sortable: true },
+    { field: 'title', sortable: true, width: 250 },
     { field: 'author', sortable: true },
-    { field: 'year', sortable: true },
+    { field: 'year', sortable: true, width: 100 },
     { field: 'isbn', sortable: true },
-    { field: 'price', sortable: true }
+    { field: 'price', sortable: true, width: 100 },
+    {
+      field: '',
+      cellRenderer: params =>
+        <IconButton onClick={() => deleteBook(params.data.id)} size="small" color="error">
+          <DeleteIcon />
+        </IconButton>
+    }
   ])
-
-  const defaultColDef = {
-    // set every column width
-    minWidth: 200,
-    // make every column editable
-    editable: true,
-    // make every column use 'text' filter by default
-    filter: 'agTextColumnFilter',
-  };
 
   useEffect(() => {
     fetchItems();
@@ -78,20 +76,11 @@ function App() {
         </Toolbar>
       </AppBar>
       <AddBook addBook={addBook} />
-      <div className="ag-theme-material" style={{ height: 400, width: 1000, margin: 'auto' }}>
+      <div className="ag-theme-alpine" style={{ height: 400, width: 1000, margin: 'auto', textAlign: 'left' }}>
         <AgGridReact
-          headerName=''
-          field='id'
-          width={100}
           rowData={books}
           columnDefs={columnDefs}
-          defaultColDef={defaultColDef}
-
-          cellRenderer={params =>
-            <IconButton onClick={() => deleteBook(params.value)} size="small" color="error">
-              <DeleteIcon />
-            </IconButton>
-          } />
+        />
       </div>
     </div>
   );
