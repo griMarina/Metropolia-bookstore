@@ -1,7 +1,7 @@
 {
   "name": "bookstore",
   "version": "0.1.0",
-  "homepage": "https://griMarina.github.io/bookstore",
+  "homepage": "https://griMarina.github.io/bookstore/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.5",
